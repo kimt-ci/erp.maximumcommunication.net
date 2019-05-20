@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ asset('library/bootstrap-4.3.1-dist/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/maximum_communication/login.css') }}">
+
+    <title>ERP Connexion</title>
+</head>
+<body>
+<div class="login">
+        <header class="logo">
+            <img src="{{ asset('maximum_communication/maximum-communication-logo.png') }}" width="300" alt="Maximum Communication Logo">
+        </header>
+    <main class="form col-xl-6 col-sm-6">
+            <div class="card">
+                <h5 class="card-header">ERP CONNEXION</h5>
+                <div class="card-body">
+                    <form action="{{ path('user_login') }}" method="post">
+                        {% if error %}
+                            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                        {% endif %}
+                        <div class="form-group">
+                            <label for="username">Nom d'utilisateur</label>
+                            <input type="text" value="{{ last_username }}" class="form-control" id="username" name="_username" aria-describedby="usenameHelp" placeholder="Username ou Email" required>
+                            {#                    <small id="usernameHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>#}
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Mot de passe</label>
+                            <input type="password" class="form-control" id="password" name="_password" placeholder="Password" required>
+                        </div>
+                        {#                <div class="form-group form-check">#}
+                        {#                    <input type="checkbox" class="form-check-input" id="exampleCheck1">#}
+                        {#                    <label class="form-check-label" for="exampleCheck1">Check me out</label>#}
+                        {#                </div>#}
+                        <button type="submit" class="btn btn-primary">Se connecter</button>
+
+                        <input type="hidden" name="_csrf_token"
+                               value="{{ csrf_token('authenticate') }}"
+                        >
+                    </form>
+                </div>
+            </div>
+    </main>
+        <footer class="footer">
+            <div class="container">
+                <span class="text-muted"> © 2019 ERP MAXIMUM COMMUNICATION By <a href="https://kimtonlines.website/" target="_blank">kimtonline.</a></span>
+            </div>
+        </footer>
+</div>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="{{ asset('library/jquery-3.4.1.min.js') }}"></script>
+<script src="{{ asset('library/bootstrap-4.3.1-dist/js/bootstrap.bundle.min.js') }}"></script>
+</body>
+</html>

@@ -18,7 +18,9 @@ Encore
      * and one CSS file (e.g. app.css) if you JavaScript imports CSS.
      */
     .addEntry('app', './assets/js/app.js')
-    //.addEntry('page1', './assets/js/page1.js')
+    .addStyleEntry('maximum_communication/login', './assets/sass/login.scss')
+    .addStyleEntry('maximum_communication/base', './assets/sass/base.scss')
+    .addStyleEntry('maximum_communication/profile', './assets/sass/profile.scss')
     //.addEntry('page2', './assets/js/page2.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
@@ -48,7 +50,7 @@ Encore
     })
 
     // enables Sass/SCSS support
-    //.enableSassLoader()
+    .enableSassLoader()
 
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()

@@ -1,0 +1,25 @@
+.titre-logo {
+  font-size: 10px;
+}
+
+.dropdownleft {
+  left: auto;
+  right: 0;
+}
+
+.content {
+  display: flex;
+}
+.content .sidebar {
+  margin-top: 2%;
+}
+.content .main-content {
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+footer {
+  text-align: center;
+}
+
+/*# sourceMappingURL=base.css.map */

@@ -1,12 +1,94 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<!doctype html>
+<html lang="fr">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>{% block title %}ERP MAXIMUM COMMUNICATION{% endblock %}</title>
+    <link rel="shortcut icon" href="{{ asset('maximum_communication/maximum-communication-favicon.ico') }}" type="image/x-icon">
+    {% block stylesheets %}
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="{{ asset('library/bootstrap-4.3.1-dist/css/bootstrap.min.css') }}" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <!-- Fontawesome CSS -->
+        <link rel="stylesheet" href="{{ asset('library/fontawesome-free-5.8.2-web/css/all.min.css') }}" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+        <!-- Maximum Communication CSS -->
+        <link rel="stylesheet" href="{{ asset('build/maximum_communication/base.css') }}">
+    {% endblock %}
+</head>
+<body>
+{% block body %}
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="{{ path('erp_dashboard') }}">
+                <img src="{{ asset('maximum_communication/maximum-communication-logo-only.png') }}" width="30" height="30" alt="">
+                <span class="titre-logo">MAXIMUM COMMUNICATION</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ path('erp_dashboard') }}">Tableau de bord <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Ressources Humaines</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Comptabilité</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Logistique</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {% if app.user.avatarName is defined and app.user.avatarName is not null %}
+                                <img src="{{ vich_uploader_asset(app.user, 'avatarFile') }}"  alt="Avatar Administrateur" class="img-thumbnail" width="30" height="30">
+                            {% else %}
+                                <img src="{{ asset('erp/users/images/no-avatar.png') }}" alt="Avatar Administrateur" class="img-thumbnail" width="30" height="30">
+                            {% endif %}
+                        </a>
+                        <div class="dropdown-menu dropdownleft" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="#">Connecté en tant que<br><b>{{ app.user.username }}</b></a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{ path('erp_user_profile', {'slug': app.user.slug}) }}">Paramètres</a>
+                            <form action="{{ path('user_logout') }}" method="post">
+                                <button type="submit" class="dropdown-item">
+                                    Déconnexion
+                                </button>
+                                <input type="hidden" name="_csrf_token"
+                                       value="{{ csrf_token('authenticate') }}"
+                                >
+                            </form>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main class="content">
+        <aside class="sidebar col-xl-3">
+            {% block sidebar %}
+            {% endblock %}
+        </aside>
+            {% block main_content %}
+            {% endblock %}
+    </main>
+{#    <footer class="fixed-bottom">#}
+{#        <div class="container">#}
+{#            <span class="text-muted"> © 2019 ERP MAXIMUM COMMUNICATION By <a href="https://kimtonlines.website/" target="_blank">kimtonline.</a></span>#}
+{#        </div>#}
+{#    </footer>#}
+{% endblock %}
+{% block javascripts %}{% endblock %}
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="{{ asset('library/jquery-3.4.1.min.js') }}"></script>
+<script src="{{ asset('library/bootstrap-4.3.1-dist/js/bootstrap.bundle.min.js') }}"></script>
+</body>
 </html>
+

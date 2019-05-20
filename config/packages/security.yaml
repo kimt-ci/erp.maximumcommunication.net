@@ -1,13 +1,36 @@
 security:
+    # ...
+    encoders:
+        App\Entity\Erp\User\User:
+            algorithm: bcrypt
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    role_hierarchy:
+        ROLE_EMPLOYEE: ROLE_USER
+        ROLE_HUMAN_RESOURCE: [ROLE_EMPLOYEE]
+        ROLE_ADMIN: [ROLE_HUMAN_RESOURCE]
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_EMPLOYEE, ROLE_HUMAN_RESOURCE, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
     providers:
-        in_memory: { memory: ~ }
+        # used to reload user from session & other features (e.g. switch_user)
+        user_provider:
+            entity:
+                class: App\Entity\Erp\User\User
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
             anonymous: true
+            provider: user_provider
+            form_login:
+                login_path: /
+                check_path: /
+                default_target_path: erp_dashboard
+            logout:
+                path: user_logout
+                target: /
+            guard:
+                authenticators:
+                    - App\Security\UserAuthenticator
 
             # activate different ways to authenticate
 
@@ -21,4 +44,4 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+         - { path: ^/erp, roles: ROLE_USER }

@@ -1,0 +1,26 @@
+html {
+  margin-top: 50px;
+}
+
+body {
+  background-color: #ededf4;
+}
+
+.login {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-content: center;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+@media screen and (max-width: 900px) {
+  .logo {
+    display: none;
+  }
+}
+
+/*# sourceMappingURL=login.css.map */
