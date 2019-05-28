@@ -8,8 +8,13 @@
 {% endblock %}
 {% block main_content %}
     <section class="main-content col-xl-9">
-        {% for message in app.flashes('warning') %}
-            <div class="alert alert-warning text-center col-xl-7">
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success text-center col-xl-7">
+                {{ message }} <i class="fas fa-exclamation"></i>
+            </div>
+        {% endfor %}
+        {% for message in app.flashes('danger') %}
+            <div class="alert alert-danger text-center col-xl-7">
                 {{ message }} <i class="fas fa-exclamation"></i>
             </div>
         {% endfor %}
@@ -34,7 +39,7 @@
                                 <th>Email</th>
                                 <th>Nom complet</th>
                                 <th>Avatar</th>
-                                <th>Action</th>
+                                <th class="text-center">Action</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -51,7 +56,16 @@
                                             <img src="{{ asset('erp/users/images/no-avatar.png') }}" alt="Avatar Administrateur" class="img-thumbnail" width="50" height="50">
                                         {% endif %}
                                     </td>
-                                    <td><a href="#" class="btn btn-info">Voir</a></td>
+                                    <td width="30%">
+                                        <a href="#" class="btn btn-warning">Modifier</a>
+                                        <form method="post" action="{{ path('erp_setting_users_delete', {'id': user.id}) }}"
+                                              onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ?');"
+                                              style="display:inline-block;">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+                                            <button class="btn btn-danger">Supprimer</button>
+                                        </form>
+                                    </td>
                             </tr>
                             {% endfor %}
                             </tbody>

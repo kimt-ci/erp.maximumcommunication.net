@@ -6,6 +6,7 @@ use App\Entity\Erp\User\User;
 use App\Form\Erp\User\UserChangePasswordType;
 use App\Form\Erp\User\UserChangeProfileType;
 use App\Form\Erp\User\UserCreateType;
+use App\Repository\Erp\User\UserRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -53,7 +54,30 @@ class UserController extends AbstractController
 
         return $this->render('erp/user/create.html.twig', [
             'form' => $form->createView(),
-            'active_profile' => "active"
         ]);
+    }
+
+    /**
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/setting/users/{id}/delete", methods={"DELETE"}, name="erp_setting_users_delete")
+     * @param Request $request
+     * @param User $user
+     * @param UserRepository $userRepository
+     * @return Response
+     */
+    public function delete(Request $request, User $user, UserRepository $userRepository): Response
+    {
+//        if (!$this->isCsrfTokenValid('delete', $request->request->get('_token'))) {
+//            return $this->redirectToRoute('erp_setting');
+//        }
+        $findUser = $userRepository->find($user->getId());
+        if ($findUser->getId())
+        {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($findUser);
+            $em->flush();
+            $this->addFlash('danger', "Utilisateur ".$findUser->getUserName()." supprimé avec succès !");
+        }
+        return $this->redirectToRoute('erp_setting');
     }
 }

@@ -2,7 +2,8 @@
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
     {% block stylesheets %}
         {{ parent() }}
-        <link rel="stylesheet" href="{{ asset('build/maximum_communication/profile.css') }}">
+        <link rel="stylesheet" href="{{ asset('library/select2-4.0.7/dist/css/select2.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('build/maximum_communication/users_crud.css') }}">
     {% endblock %}
 {% block sidebar %}
     {{ include('erp/component/sidebar.html.twig') }}
@@ -49,7 +50,7 @@
                     </div>
                     <div class="form-group">
                         <label for="email"><i class="fas fa-times-circle text-danger"></i> Rôles</label>
-                        {{ form_row(form.roles, {attr: {class: 'form-control'} }) }}
+                        {{ form_row(form.roles, {attr: {class: 'form-control select2'} }) }}
 {#                        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp"#}
 {#                               placeholder="Email" required>#}
 {#                        <small id="emailHelp" class="form-text text-muted">We'll never share your phone with anyone#}
@@ -77,8 +78,22 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-5">
-
+                <div class="col-xl-4">
+                    <h6 class="text-center"><i class="fas fa-info-circle"></i> Description des rôles utilisateurs</h6>
+                    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                        <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Utilisateur</a>
+                        <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Gestionnaire Ressources Humaines</a>
+                        <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Gestionnaire Commercial</a>
+                        <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Gestionnaire Logistique</a>
+                        <a class="nav-link" id="v-pills-accounting-tab" data-toggle="pill" href="#v-pills-accounting" role="tab" aria-controls="v-pills-accounting" aria-selected="false">Gestionnaire Comptabilité</a>
+                    </div>
+                    <div class="tab-content" id="v-pills-tabContent">
+                        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">Cillum ad ut irure tempor velit nostrud occaecat ullamco aliqua anim Lorem sint. Veniam sint duis incididunt do esse magna mollit excepteur laborum qui. Id id reprehenderit sit est eu aliqua occ</div>
+                        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">Cillum ad ut irure tempor velit nostrud occaecat ullamco aliqua anim Lorem sint. Veniam sint duis incididunt do esse magna mollit excepteur laborum qui. Id id reprehenderit sit est eu aliqua occaecat quis et velit excepteur laborum mollit dolore eiusmod. Ipsum dolor in occaecat commodo et voluptate minim reprehenderit mollit pariatur.</div>
+                        <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">Cillum ad ut irure tempor velit nostrud occaecat ullamco aliqua anim Lorem sint. Veniam sint duis incididunt do esse magna mollit excepteur laborum qui. Id id reprehenderit sit est eu aliqua occaecat quis et velit excepteur la</div>
+                        <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">Cillum ad ut irure tempor velit nostrud occaecat ullamco aliqua anim Lorem sint. Veniam sint duis incididunt do esse magna mollit excepteur laborum qui. Id id reprehenderit sit est eu aliqua occaecat quis e</div>
+                        <div class="tab-pane fade" id="v-pills-accounting" role="tabpanel" aria-labelledby="v-pills-accounting-tab">Cillum ad ut irure tempor velit nostrud occaecat ullamco aliqua anim Lorem sint.</div>
+                    </div>
                 </div>
             </div>
             <div>
@@ -88,6 +103,8 @@
     </section>
 {% endblock %}
 {% block javascripts %}
+    <!-- Select 2 -->
+    <script src="{{ asset('library/select2-4.0.7/dist/js/select2.min.js') }}"></script>
      <script type="text/javascript">
         if (window.FileReader) {
 
@@ -114,5 +131,10 @@
         } else {
             alert("FileReader object not found :( \nTry using Chrome, Firefox or WebKit");
         }
-    </script>
+
+        $(".select2").select2({
+            multiple: true,
+        });
+
+     </script>
 {% endblock %}
