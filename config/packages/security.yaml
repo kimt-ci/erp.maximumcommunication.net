@@ -5,10 +5,12 @@ security:
             algorithm: bcrypt
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     role_hierarchy:
-        ROLE_EMPLOYEE: ROLE_USER
-        ROLE_HUMAN_RESOURCE: [ROLE_EMPLOYEE]
-        ROLE_ADMIN: [ROLE_HUMAN_RESOURCE]
-        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_EMPLOYEE, ROLE_HUMAN_RESOURCE, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_HUMAN_RESOURCES: [ROLE_USER]
+        ROLE_COMMERCIAL: [ROLE_USER]
+        ROLE_LOGISTICS: [ROLE_USER]
+        ROLE_ACCOUNTING: [ROLE_USER]
+        ROLE_ADMIN: [ROLE_HUMAN_RESOURCES, ROLE_COMMERCIAL, ROLE_LOGISTICS, ROLE_ACCOUNTING]
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
     providers:
         # used to reload user from session & other features (e.g. switch_user)
         user_provider:
@@ -43,5 +45,6 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-         - { path: ^/erp, roles: ROLE_USER }
+         - { path: ^/manage/setting, roles: ROLE_ADMIN }
+         - { path: ^/manage, roles: ROLE_USER }
+

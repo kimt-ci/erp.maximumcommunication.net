@@ -19,7 +19,7 @@ class UserChangePasswordType extends AbstractType
             ])
             ->add('plainPassword', RepeatedType::class, array(
                 'type' => PasswordType::class,
-                'invalid_message' => 'Les deux mots de passe entrés ne correspondent pas.',
+                'invalid_message' => 'Le mot de passe et le confirmer mot de passe ne correspondent pas.',
                 'required' => false,
                 'first_options'  => array('label' => false),
                 'second_options' => array('label' => false),

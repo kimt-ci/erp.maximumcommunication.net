@@ -11,14 +11,15 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\Validator\Constraints as SecurityAssert;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\Erp\User\UserRepository")
- * @UniqueEntity(fields="username", message="Username already taken")
- * @UniqueEntity(fields="email", message="Email already taken")
- * @UniqueEntity(fields="phone", message="Phone already taken")
+ * @UniqueEntity("username", groups={"user_create"})
+ * @UniqueEntity("email", groups={"user_create"})
+ * @UniqueEntity("phone", groups={"user_create"})
  * @Vich\Uploadable
  */
 class User implements UserInterface, Serializable
@@ -38,19 +39,20 @@ class User implements UserInterface, Serializable
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(groups={"user_create"})
      */
     private $username;
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(groups={"user_create"})
      * @Assert\Email()
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
+     * @Assert\NotBlank(groups={"user_create"})
      */
     private $roles = [];
 
@@ -62,11 +64,14 @@ class User implements UserInterface, Serializable
 
     /**
      * @Assert\Length(max=4096)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(groups={"user_change_password", "user_create"})
      */
     private $plainPassword;
 
     /**
+     * @SecurityAssert\UserPassword(
+     *     groups={"user_change_password"}
+     * )
      * @Assert\Length(max=4096)
      * @Assert\NotBlank(groups={"user_change_password"})
      */
@@ -160,7 +165,7 @@ class User implements UserInterface, Serializable
     /**
      * @see UserInterface
      */
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
         return $this->password;
     }

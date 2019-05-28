@@ -3,7 +3,7 @@
         Paramètres personnel
     </div>
     <ul class="list-group list-group-flush">
-        <li class="list-group-item {% if active_profile is defined %}{{ active_profile }}{% endif %}"><a href="{{ path('erp_user_profile', {'slug': app.user.slug}) }}" {% if active_profile is defined %}class="text-white"{% endif %}>Profil</a></li>
-        <li class="list-group-item {% if active_password is defined %}{{ active_password }}{% endif %}"><a href="{{ path('erp_user_password', {'slug': app.user.slug}) }}" {% if active_password is defined %}class="text-white"{% endif %}>Mot de passe</a></li>
+        <li class="list-group-item {% if active_profile is defined %}{{ active_profile }}{% endif %}"><a href="{{ path('erp_user_profile', {'slug': app.user.slug}) }}" {% if active_profile is defined %}class="text-white"{% endif %}><i class="fas fa-user"></i> Profil</a></li>
+        <li class="list-group-item {% if active_password is defined %}{{ active_password }}{% endif %}"><a href="{{ path('erp_user_password', {'slug': app.user.slug}) }}" {% if active_password is defined %}class="text-white"{% endif %}><i class="fas fa-key"></i> Mot de passe</a></li>
     </ul>
 </div>

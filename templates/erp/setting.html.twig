@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+    {% block stylesheets %}
+        {{ parent() }}
+        <link rel="stylesheet" href="{{ asset('build/maximum_communication/profile.css') }}">
+    {% endblock %}
+{% block sidebar %}
+    {{ include('erp/component/sidebar.html.twig') }}
+{% endblock %}
+{% block main_content %}
+    <section class="main-content col-xl-9">
+        {% for message in app.flashes('warning') %}
+            <div class="alert alert-warning text-center col-xl-7">
+                {{ message }} <i class="fas fa-exclamation"></i>
+            </div>
+        {% endfor %}
+        <div class="row">
+            <div class="col-md-9">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">Configuration</li>
+                        <li class="breadcrumb-item active" aria-current="page">Utilisateurs</li>
+                    </ol>
+                </nav>
+                {% if users is defined and users is not null %}
+                    <div class="card">
+                        <div class="card-header">
+                           <h4 class="text-center"><i class="fas fa-users"></i> LISTE DES UTILISATEURS</h4>
+                        </div>
+                        <table class="table table-bordered table-condensed" style="margin-bottom: auto">
+                            <thead>
+                            <tr>
+                                <th>N°</th>
+                                <th>Nom d'utilisateur</th>
+                                <th>Email</th>
+                                <th>Nom complet</th>
+                                <th>Avatar</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for user in users %}
+                            <tr>
+                                    <td>{{ loop.index }}</td>
+                                    <td>{{ user.username }}</td>
+                                    <td>{{ user.email }}</td>
+                                    <td>{{ user.fullname }}</td>
+                                    <td>
+                                        {% if user.avatarName is defined and user.avatarName is not null %}
+                                            <img src="{{ vich_uploader_asset(app.user, 'avatarFile') }}"  alt="Avatar Administrateur" class="img-thumbnail" width="50" height="50">
+                                        {% else %}
+                                            <img src="{{ asset('erp/users/images/no-avatar.png') }}" alt="Avatar Administrateur" class="img-thumbnail" width="50" height="50">
+                                        {% endif %}
+                                    </td>
+                                    <td><a href="#" class="btn btn-info">Voir</a></td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        <div class="card-footer"></div>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col-md-2">
+                <a href="{{ path('erp_setting_users_create') }}" class="btn btn-success btn-sm"><i class="fas fa-user-plus"></i> Créer utilisateur</a>
+            </div>
+        </div>
+    </section>
+{% endblock %}

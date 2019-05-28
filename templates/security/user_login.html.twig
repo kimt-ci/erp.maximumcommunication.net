@@ -4,12 +4,12 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <link rel="shortcut icon" href="{{ asset('maximum_communication/maximum-communication-favicon.ico') }}" type="image/x-icon">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ asset('library/bootstrap-4.3.1-dist/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('build/maximum_communication/login.css') }}">
 
-    <title>ERP Connexion</title>
+    <title>ERP MAXIMUM COMMUNICATION</title>
 </head>
 <body>
 <div class="login">
@@ -31,7 +31,12 @@
                         </div>
                         <div class="form-group">
                             <label for="password">Mot de passe</label>
-                            <input type="password" class="form-control" id="password" name="_password" placeholder="Password" required>
+                            <div class="input-group mb-3">
+                                <input type="password"  id="password" name="_password" class="form-control" placeholder="Password" aria-label="Example text with button addon" aria-describedby="button-addon1" required>
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-outline-secondary" type="button" id="show-password"  onclick="showPassword()">Montrer</button>
+                                </div>
+                            </div>
                         </div>
                         {#                <div class="form-group form-check">#}
                         {#                    <input type="checkbox" class="form-check-input" id="exampleCheck1">#}
@@ -48,7 +53,7 @@
     </main>
         <footer class="footer">
             <div class="container">
-                <span class="text-muted"> © 2019 ERP MAXIMUM COMMUNICATION By <a href="https://kimtonlines.website/" target="_blank">kimtonline.</a></span>
+                <span class="text-muted"> © 2019 ERP MAXIMUM COMMUNICATION By <a href="https://kimtonlines.website/" target="_blank">kimtonlines.</a></span>
             </div>
         </footer>
 </div>
@@ -56,5 +61,7 @@
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="{{ asset('library/jquery-3.4.1.min.js') }}"></script>
 <script src="{{ asset('library/bootstrap-4.3.1-dist/js/bootstrap.bundle.min.js') }}"></script>
+<!-- Maximum Communication JS -->
+<script src="{{ asset('maximum_communication/js/main.js') }}"></script>
 </body>
 </html>

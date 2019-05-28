@@ -21,6 +21,7 @@ Encore
     .addStyleEntry('maximum_communication/login', './assets/sass/login.scss')
     .addStyleEntry('maximum_communication/base', './assets/sass/base.scss')
     .addStyleEntry('maximum_communication/profile', './assets/sass/profile.scss')
+    .addStyleEntry('maximum_communication/users_crud', './assets/sass/users_crud.scss')
     //.addEntry('page2', './assets/js/page2.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
